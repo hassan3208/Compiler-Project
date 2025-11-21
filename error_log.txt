@@ -1,2 +1,5 @@
-Line 16: ERROR → '
-Line 20: ERROR → "
+Line 3: ERROR → 8counter (Invalid Identifier)
+Line 12: ERROR → '
+Line 13: ERROR → --- (Invalid Operator)
+Line 17: ERROR → '
+Line 21: ERROR → "
