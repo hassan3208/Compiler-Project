@@ -9,6 +9,7 @@ FILE *errorFile, *tokensFile;
 \n                  { line++; }
 [ \t\r]+            ;   
 
+
 "novibe"|"vibe"|"vi.be"|"chill"|"mood"|"chills"|"ify"|"elfy"|"elsy"|"skip"|"stop"|"welcome"|"yeap"|"nah"|"take"|"show"|"get" {
     printf("Line %d: KEYWORD → %s\n", line, yytext);
     fprintf(tokensFile, "Line %d: KEYWORD → %s\n", line, yytext);
@@ -25,6 +26,13 @@ FILE *errorFile, *tokensFile;
     printf("Line %d: OPERATOR → %s\n", line, yytext);
     fprintf(tokensFile, "Line %d: OPERATOR → %s\n", line, yytext);
 }
+
+
+[+\-*/=<>!]{2,} {
+    printf("Line %d: ERROR → %s (Invalid Operator)\n", line, yytext);
+    fprintf(errorFile, "Line %d: ERROR → %s (Invalid Operator)\n", line, yytext);
+}
+
 
 
 "::"|";"|"{"|"}"|"("|")"|"["|"]" {
@@ -54,6 +62,13 @@ FILE *errorFile, *tokensFile;
     printf("Line %d: IDENTIFIER → %s\n", line, yytext);
     fprintf(tokensFile, "Line %d: IDENTIFIER → %s\n", line, yytext);
 }
+
+
+[0-9]+[a-zA-Z_][a-zA-Z0-9_]* {
+    printf("Line %d: ERROR → %s (Invalid Identifier)\n", line, yytext);
+    fprintf(errorFile, "Line %d: ERROR → %s (Invalid Identifier)\n", line, yytext);
+}
+
 
 
 . {
