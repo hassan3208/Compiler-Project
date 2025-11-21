@@ -1,6 +1,6 @@
 vibe welcome() {
-    chills songName = "Summer Vibes";
-    vibe counter = 0;
+    chills _songName = "Summer Vibes";
+    vibe 8counter = 0;
     vi.be speed = 1.5;;
 
     show("Starting playlist...");
@@ -9,7 +9,8 @@ vibe welcome() {
     ify (counter < 5) {
         counter++3;
         show("Playing: ");
-        show(songName);
+        show(songName');
+        counter---3;
     }
     elfy {
         stop;
@@ -23,4 +24,3 @@ vibe welcome() {
 
     take 0;
 }
-
