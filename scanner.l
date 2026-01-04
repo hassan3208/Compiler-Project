@@ -7,6 +7,7 @@
 %}
 
 %%
+"//".* ;
 "welcome"      return WELCOME;
 "fun"          return FUN;
 "vibe"         return VIBE;
@@ -41,4 +42,3 @@
 .               { printf("Unknown character: %s\n", yytext); }
 
 %%
-
