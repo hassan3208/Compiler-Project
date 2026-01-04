@@ -1,26 +1,43 @@
-vibe welcome() {
-    chills _songName = "Summer Vibes";
-    vibe 8counter = 0;
-    vi.be speed = 1.5;;
+welcome() {
 
-    show("Starting playlist...");
-    songName=get(songName);
-    
-    ify (counter < 5) {
-        counter++3;
-        show("Playing: ");
-        show(songName');
-        counter---3;
+  vibe x;
+  vibe y;
+
+  x = 10;
+  y = 2;
+
+  x = x + y;
+  x = x - y;
+  x = x * y;
+  x = x / y;
+
+  x = -x;
+  x = +x;
+
+
+  ++x;
+  --x;
+
+
+  x++;
+  x--;
+
+
+  ify (x < y) {
+    x = x + 1;
+  } elfy {
+    x = x - 1;
+  }
+
+
+  while (x < 20) {
+    ++x;
+
+    ify (x == 15) {
+      break;
     }
-    elfy {
-        stop;
-        show("Playlist finished!"');
-    }
+  }
 
-    elfy
-        chill moodChar = 'H'";
-        show(moodChar);
-        skip;
-
-    take 0;
+  take x;
 }
+

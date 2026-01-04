@@ -1,105 +1,44 @@
+%option noyywrap yylineno
 %{
+#include "parser.tab.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-int line = 1;
-FILE *errorFile, *tokensFile;
 %}
 
 %%
-\n                  { line++; }
-[ \t\r]+            ;   
+"welcome"      return WELCOME;
+"fun"          return FUN;
+"vibe"         return VIBE;
+"ify"          return IFY;
+"elfy"         return ELF;
+"while"        return WHILE;
+"take"         return TAKE;
+"break"        return BREAK;
+"continue"     return CONTINUE;
 
+"=="            return EQ;
+"<"             return LT;
+"="             return ASSIGN;
+"++"    { return INC; }
+"--"    { return DEC; }
+"+"           {  return PLUS;}
+"-"          {   return MIN;}
+"*"          { return MUL; }
+"/"          { return DIV; }
 
-"novibe"|"vibe"|"vi.be"|"chill"|"mood"|"chills"|"ify"|"elfy"|"elsy"|"skip"|"stop"|"welcome"|"yeap"|"nah"|"take"|"show"|"get" {
-    printf("Line %d: KEYWORD → %s\n", line, yytext);
-    fprintf(tokensFile, "Line %d: KEYWORD → %s\n", line, yytext);
-}
+";"             return SEMI;
+","             return COMMA;
+"("             return LPAREN;
+")"             return RPAREN;
+"{"             return LBRACE;
+"}"             return RBRACE;
 
-[a-zA-Z_][a-zA-Z0-9_]*"++"[0-9]+ {
-    printf("Line %d: SPECIAL OPERATOR →%s\n", line, yytext);
-    fprintf(tokensFile, "Line %d: SPECIAL OPERATOR → %s\n", line, yytext);
-}
+[0-9]+          { yylval.num = atoi(yytext); return NUMBER; }
+[a-zA-Z_][a-zA-Z0-9_]*  { yylval.id = strdup(yytext); return ID; }
 
+[ \t\r\n]+      ;
+.               { printf("Unknown character: %s\n", yytext); }
 
-
-"++"|"--"|"="|">="|"<="|"+"|"-"|"*"|"/"|"<"|">"|"=="|"!="|"/="|"*="|"+="|"-=" {
-    printf("Line %d: OPERATOR → %s\n", line, yytext);
-    fprintf(tokensFile, "Line %d: OPERATOR → %s\n", line, yytext);
-}
-
-
-[+\-*/=<>!]{2,} {
-    printf("Line %d: ERROR → %s (Invalid Operator)\n", line, yytext);
-    fprintf(errorFile, "Line %d: ERROR → %s (Invalid Operator)\n", line, yytext);
-}
-
-
-
-"::"|";"|"{"|"}"|"("|")"|"["|"]" {
-    printf("Line %d: PUNCTUATION → %s\n", line, yytext);
-    fprintf(tokensFile, "Line %d: PUNCTUATION → %s\n", line, yytext);
-}
-
-
-[0-9]+(\.[0-9]+)?([eE][+-]?[0-9]+)? {
-    printf("Line %d: NUMBER → %s\n", line, yytext);
-    fprintf(tokensFile, "Line %d: NUMBER → %s\n", line, yytext);
-}
-
-
-\"([^\"\\]|\\.)*\" {
-    printf("Line %d: STRING → %s\n", line, yytext);
-    fprintf(tokensFile, "Line %d: STRING → %s\n", line, yytext);
-}
-
-\'.\' {
-    printf("Line %d: CHAR → %s\n", line, yytext);
-    fprintf(tokensFile, "Line %d: CHAR → %s\n", line, yytext);
-}
-
-
-[a-zA-Z_][a-zA-Z0-9_]* {
-    printf("Line %d: IDENTIFIER → %s\n", line, yytext);
-    fprintf(tokensFile, "Line %d: IDENTIFIER → %s\n", line, yytext);
-}
-
-
-[0-9]+[a-zA-Z_][a-zA-Z0-9_]* {
-    printf("Line %d: ERROR → %s (Invalid Identifier)\n", line, yytext);
-    fprintf(errorFile, "Line %d: ERROR → %s (Invalid Identifier)\n", line, yytext);
-}
-
-
-
-. {
-    printf("Line %d: ERROR → %s\n", line, yytext);
-    fprintf(errorFile, "Line %d: ERROR → %s\n", line, yytext);
-}
 %%
 
-int yywrap() { return 1; }
-
-int main() {
-    errorFile = fopen("error_log.txt", "w");
-    if (!errorFile) {
-        printf("Could not open error_log.txt for writing!\n");
-        return 1;
-    }
-    
-    tokensFile = fopen("tokens.txt", "w");
-    if (!tokensFile) {
-        printf("Could not open tokens.txt for writing!\n");
-        return 1;
-    }
-
-
-    printf("----- Lexical Analysis Output -----\n");
-    yylex();
-    printf("----- End of File -----\n");
-    
-    
-    fclose(tokensFile);
-    fclose(errorFile);
-    
-    return 0;
-}

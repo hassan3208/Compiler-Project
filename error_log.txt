@@ -1,5 +1,5 @@
 Line 3: ERROR → 8counter (Invalid Identifier)
 Line 12: ERROR → '
 Line 13: ERROR → --- (Invalid Operator)
-Line 17: ERROR → '
-Line 21: ERROR → "
+Line 18: ERROR → '
+Line 22: ERROR → "
