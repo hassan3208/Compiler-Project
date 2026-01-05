@@ -14,6 +14,7 @@ int yylex(void);
 
 /* Tokens */
 %token WELCOME VIBE IFY ELF WHILE TAKE
+%token FOR
 %token FUN BREAK CONTINUE
 %token ID NUMBER
 %token ASSIGN PLUS LT EQ
@@ -64,6 +65,7 @@ stmt
   | inc_dec_stmt 
   | if_stmt
   | while_stmt
+  | for_stmt
   | return_stmt
   ;
 
@@ -84,6 +86,7 @@ loop_stmt
   | inc_dec_stmt   
   | loop_if_stmt
   | while_stmt
+  | for_stmt
   ;
 
 
@@ -133,6 +136,24 @@ else_part
 while_stmt
   : WHILE LPAREN condition RPAREN loop_block
   ;
+  
+for_stmt
+  : FOR LPAREN for_init SEMI condition SEMI for_update RPAREN loop_block
+  ;
+
+
+for_init
+  : assign_no_semi
+  | /* empty */
+  ;
+
+for_update
+  : assign_no_semi
+  | inc_dec_no_semi
+  | /* empty */
+  ;
+
+
 
 /* ================= STATEMENTS ================= */
 
@@ -158,6 +179,18 @@ inc_dec_stmt
   | INC ID SEMI
   | DEC ID SEMI
   ;
+
+assign_no_semi
+  : ID ASSIGN expr
+  ;
+
+inc_dec_no_semi
+  : ID INC
+  | ID DEC
+  | INC ID
+  | DEC ID
+  ;
+
 
 
 return_stmt

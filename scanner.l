@@ -14,6 +14,7 @@
 "ify"          return IFY;
 "elfy"         return ELF;
 "while"        return WHILE;
+"for"          return FOR; 
 "take"         return TAKE;
 "break"        return BREAK;
 "continue"     return CONTINUE;
@@ -42,3 +43,4 @@
 .               { printf("Unknown character: %s\n", yytext); }
 
 %%
+

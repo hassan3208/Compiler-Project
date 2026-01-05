@@ -196,28 +196,29 @@ typedef
 #define	ELF	261
 #define	WHILE	262
 #define	TAKE	263
-#define	FUN	264
-#define	BREAK	265
-#define	CONTINUE	266
-#define	ID	267
-#define	NUMBER	268
-#define	ASSIGN	269
-#define	PLUS	270
-#define	LT	271
-#define	EQ	272
-#define	MIN	273
-#define	MUL	274
-#define	DIV	275
-#define	LPAREN	276
-#define	RPAREN	277
-#define	LBRACE	278
-#define	RBRACE	279
-#define	SEMI	280
-#define	COMMA	281
-#define	INC	282
-#define	DEC	283
-#define	UMINUS	284
-#define	UPLUS	285
+#define	FOR	264
+#define	FUN	265
+#define	BREAK	266
+#define	CONTINUE	267
+#define	ID	268
+#define	NUMBER	269
+#define	ASSIGN	270
+#define	PLUS	271
+#define	LT	272
+#define	EQ	273
+#define	MIN	274
+#define	MUL	275
+#define	DIV	276
+#define	LPAREN	277
+#define	RPAREN	278
+#define	LBRACE	279
+#define	RBRACE	280
+#define	SEMI	281
+#define	COMMA	282
+#define	INC	283
+#define	DEC	284
+#define	UMINUS	285
+#define	UPLUS	286
 
 
 #line 169 "/usr/share/bison++/bison.h"
@@ -272,6 +273,7 @@ static const int IFY;
 static const int ELF;
 static const int WHILE;
 static const int TAKE;
+static const int FOR;
 static const int FUN;
 static const int BREAK;
 static const int CONTINUE;
@@ -308,28 +310,29 @@ static const int UPLUS;
 	,ELF=261
 	,WHILE=262
 	,TAKE=263
-	,FUN=264
-	,BREAK=265
-	,CONTINUE=266
-	,ID=267
-	,NUMBER=268
-	,ASSIGN=269
-	,PLUS=270
-	,LT=271
-	,EQ=272
-	,MIN=273
-	,MUL=274
-	,DIV=275
-	,LPAREN=276
-	,RPAREN=277
-	,LBRACE=278
-	,RBRACE=279
-	,SEMI=280
-	,COMMA=281
-	,INC=282
-	,DEC=283
-	,UMINUS=284
-	,UPLUS=285
+	,FOR=264
+	,FUN=265
+	,BREAK=266
+	,CONTINUE=267
+	,ID=268
+	,NUMBER=269
+	,ASSIGN=270
+	,PLUS=271
+	,LT=272
+	,EQ=273
+	,MIN=274
+	,MUL=275
+	,DIV=276
+	,LPAREN=277
+	,RPAREN=278
+	,LBRACE=279
+	,RBRACE=280
+	,SEMI=281
+	,COMMA=282
+	,INC=283
+	,DEC=284
+	,UMINUS=285
+	,UPLUS=286
 
 
 #line 215 "/usr/share/bison++/bison.h"

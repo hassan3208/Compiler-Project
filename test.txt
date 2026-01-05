@@ -1,10 +1,16 @@
+fun sum(){
+    take 2;
+}
+
 welcome() {
 
+// comment
   vibe x;
   vibe y;
 
   x = 10;
   y = 2;
+
 
   x = x + y;
   x = x - y;
@@ -36,6 +42,11 @@ welcome() {
     ify (x == 15) {
       break;
     }
+  }
+  
+  
+  for (x = 0; x < 5; x++) {
+    ++y;
   }
 
   take x;
