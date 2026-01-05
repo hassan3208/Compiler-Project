@@ -45,8 +45,23 @@ function_list
   ;
 
 function
-  : FUN ID LPAREN RPAREN block
+  : FUN ID LPAREN param_list RPAREN block
   ;
+
+param_list
+  : param_decl
+  | /* empty */
+  ;
+
+param_decl
+  : param_decl COMMA param
+  | param
+  ;
+
+param
+  : VIBE ID
+  ;
+
 
 /* ================= NORMAL BLOCK ================= */
 
@@ -62,7 +77,8 @@ stmt_list
 stmt
   : declaration
   | assignment
-  | inc_dec_stmt 
+  | inc_dec_stmt
+  | func_call_stmt 
   | if_stmt
   | while_stmt
   | for_stmt
@@ -191,6 +207,21 @@ inc_dec_no_semi
   | DEC ID
   ;
 
+func_call_stmt
+  : ID LPAREN arg_list RPAREN SEMI
+  ;
+  
+arg_list
+  : arg_values
+  | /* empty */
+  ;
+
+arg_values
+  : arg_values COMMA expr
+  | expr
+  ;
+
+
 
 
 return_stmt
@@ -211,6 +242,7 @@ expr
   | expr DIV expr
   | MIN expr   %prec UMINUS
   | PLUS expr  %prec UPLUS
+  | ID LPAREN arg_list RPAREN 
   | NUMBER
   | ID
   ;

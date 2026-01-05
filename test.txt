@@ -1,5 +1,5 @@
-fun sum(){
-    take 2;
+fun sum(vibe a, vibe b){
+    take a+b;
 }
 
 welcome() {
@@ -7,10 +7,12 @@ welcome() {
 // comment
   vibe x;
   vibe y;
+  
+  
 
   x = 10;
   y = 2;
-
+  sum(a,b);
 
   x = x + y;
   x = x - y;
@@ -49,6 +51,6 @@ welcome() {
     ++y;
   }
 
-  take x;
+  //take x;
 }
 
