@@ -13,7 +13,7 @@
 
  #line 8 "/usr/share/bison++/bison.h"
 
-#line 10 "parser.y"
+#line 11 "parser.y"
 typedef union {
   int num;
   char* id;
@@ -22,6 +22,7 @@ typedef union {
 #ifndef YY_USE_CLASS
 #define YYSTYPE yy_parse_stype
 #endif
+#define YY_parse_parse .error verbose
 
 #line 21 "/usr/share/bison++/bison.h"
  /* %{ and %header{ and %union, during decl */

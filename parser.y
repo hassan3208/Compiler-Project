@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 extern int yylineno;
+extern char *yytext;
 void yyerror(const char *s);
 int yylex(void);
 %}
@@ -11,6 +12,9 @@ int yylex(void);
   int num;
   char* id;
 }
+
+%define parse.error verbose
+
 
 /* Tokens */
 %token WELCOME VIBE IFY ELF WHILE TAKE
@@ -252,7 +256,7 @@ expr
 /* ================= ERROR & MAIN ================= */
 
 void yyerror(const char *s) {
-  fprintf(stderr, "❌ Syntax Error at line %d: %s\n", yylineno, s);
+  fprintf(stderr,"❌ Syntax Error at line %d near '%s' (%s)\n",yylineno, yytext, s);
 }
 
 int main() {

@@ -104,10 +104,11 @@ Maintained by Magnus Ekdahl <magnus@debian.org>
 #include <stdlib.h>
 
 extern int yylineno;
+extern char *yytext;
 void yyerror(const char *s);
 int yylex(void);
 
-#line 10 "parser.y"
+#line 11 "parser.y"
 typedef union {
   int num;
   char* id;
@@ -116,6 +117,7 @@ typedef union {
 #ifndef YY_USE_CLASS
 #define YYSTYPE yy_parse_stype
 #endif
+#define YY_parse_parse .error verbose
 
 #line 88 "/usr/share/bison++/bison.cc"
 /* %{ and %header{ and %union, during decl */
@@ -621,15 +623,15 @@ static const short yyrhs[] = {    33,
 
 #if (YY_parse_DEBUG != 0) || defined(YY_parse_ERROR_VERBOSE) 
 static const short yyrline[] = { 0,
-    37,    43,    44,    48,    52,    53,    57,    58,    62,    69,
-    73,    74,    78,    79,    80,    81,    82,    83,    84,    85,
-    91,    95,    96,   100,   101,   102,   103,   104,   105,   112,
-   116,   117,   122,   126,   127,   131,   132,   133,   134,   135,
-   141,   145,   146,   147,   153,   157,   162,   163,   167,   168,
-   169,   177,   181,   185,   189,   193,   194,   195,   196,   200,
-   204,   205,   206,   207,   211,   215,   216,   220,   221,   228,
-   234,   235,   239,   240,   241,   242,   243,   244,   245,   246,
-   247
+    41,    47,    48,    52,    56,    57,    61,    62,    66,    73,
+    77,    78,    82,    83,    84,    85,    86,    87,    88,    89,
+    95,    99,   100,   104,   105,   106,   107,   108,   109,   116,
+   120,   121,   126,   130,   131,   135,   136,   137,   138,   139,
+   145,   149,   150,   151,   157,   161,   166,   167,   171,   172,
+   173,   181,   185,   189,   193,   197,   198,   199,   200,   204,
+   208,   209,   210,   211,   215,   219,   220,   224,   225,   232,
+   238,   239,   243,   244,   245,   246,   247,   248,   249,   250,
+   251
 };
 
 static const char * const yytname[] = {   "$","error","$illegal.","WELCOME",
@@ -1459,13 +1461,13 @@ YYLABEL(yyerrhandle)
 /* END */
 
  #line 1038 "/usr/share/bison++/bison.cc"
-#line 250 "parser.y"
+#line 254 "parser.y"
 
 
 /* ================= ERROR & MAIN ================= */
 
 void yyerror(const char *s) {
-  fprintf(stderr, "❌ Syntax Error at line %d: %s\n", yylineno, s);
+  fprintf(stderr,"❌ Syntax Error at line %d near '%s' (%s)\n",yylineno, yytext, s);
 }
 
 int main() {
