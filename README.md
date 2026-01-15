@@ -1,6 +1,7 @@
 ## 1. Source Code Files  
 - `scanner.l` → Flex file (lexical analyzer)  
-- `test.txt` → My unique test program (25+ lines)  
+- `test.txt` → My unique test program (25+ lines)
+- `Document` → https://docs.google.com/document/d/1RQPYce3iAHkco8VK4EeyEgbsyV_AHVzO04LYjENLAYM/edit?tab=t.0#heading=h.8f3zdq2licbt  
 
 ## 2. Output Files  
 - `tokens.txt` → All tokens with line numbers  
