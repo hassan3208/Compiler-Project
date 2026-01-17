@@ -1,0 +1,15 @@
+Compiling Phase 2 (Inshrah 0384)...
+[System Report] Line 4: Variable Declaration detected.
+[System Report] Line 5: Variable Initialization detected.
+[System Report] Line 7: Output Operation (NIKAL).
+[System Report] Line 9: Standard Assignment (=).
+[System Report] Line 13: Output Operation (NIKAL).
+[System Report] Line 15: Output Operation (NIKAL).
+[System Report] Line 16: Conditional Block with Else (WARNAH).
+[System Report] Line 19: Standard Assignment (=).
+[System Report] Line 20: While Loop (CHALA) detected.
+[System Report] Line 22: Return Statement (VAPIS).
+[System Report] Line 23: Defined Function 'func' (AMAL)
+
+=== PARSING COMPLETE ===
+Status: AAGHAZ (Start) to IKHTITAM (End) verified successfully.

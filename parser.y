@@ -2,267 +2,164 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+extern int yylex();
+extern int yyparse();
+extern FILE *yyin;
 extern int yylineno;
-extern char *yytext;
+
 void yyerror(const char *s);
-int yylex(void);
 %}
 
-%union {
-  int num;
-  char* id;
-}
+/* TOKEN DEFINITIONS */
+%token KW_START KW_END KW_FUNC KW_INT KW_FLOAT KW_STRING KW_CONFIRM
+%token KW_IF KW_FOR KW_ELSE KW_COUNTER KW_WHILE KW_INPUT KW_OUTPUT KW_RETURN
 
-%define parse.error verbose
+%token OP_CONDASSIGN OP_INCR2 OP_SWAP OP_EQ OP_NEQ OP_LEQ OP_GEQ
+%token OP_AND OP_OR OP_ADD_ASSIGN OP_SUB_ASSIGN
+%token OP_ADD OP_SUB OP_MUL OP_DIV OP_ASSIGN OP_LT OP_GT OP_NOT OP_MOD
 
+%token PUNC_ARROW PUNC_SCOPE PUNC_DBL_COLON PUNC_SEMI
+%token LBRACE RBRACE LPAREN RPAREN LBRACKET RBRACKET
 
-/* Tokens */
-%token WELCOME VIBE IFY ELF WHILE TAKE
-%token FOR
-%token FUN BREAK CONTINUE
-%token ID NUMBER
-%token ASSIGN PLUS LT EQ
-%token MIN MUL DIV
-%token LPAREN RPAREN LBRACE RBRACE SEMI COMMA
-%token INC DEC
+%token NUMBER_FLOAT NUMBER_INT STRING_LITERAL CHAR_LITERAL IDENTIFIER
 
-%left PLUS MIN
-%left MUL DIV
-%right UMINUS UPLUS
-
-
-%type <num> expr
+/* Precedence */
+%left OP_ADD OP_SUB
+%left OP_MUL OP_DIV
+%left OP_AND OP_OR
 
 %%
 
-/* ================= START SYMBOL ================= */
+/* GRAMMAR RULES */
 
-program
-  : function_list WELCOME LPAREN RPAREN block
-  ;
+/* UNIQUE STRUCTURE: Whole file is an AAGHAZ block */
+program:
+    KW_START func_list KW_END
+    { 
+        printf("\n=== PARSING COMPLETE ===\n");
+        printf("Status: AAGHAZ (Start) to IKHTITAM (End) verified successfully.\n");
+    }
+    ;
 
-/* ================= FUNCTIONS ================= */
+func_list:
+    function
+    | function func_list
+    ;
 
-function_list
-  : function_list function
-  | /* empty */
-  ;
+/* Function: AMAL name () { ... } */
+function:
+    KW_FUNC IDENTIFIER LPAREN RPAREN LBRACE stmt_list RBRACE
+    { printf("[System Report] Line %d: Defined Function '%s' (AMAL)\n", yylineno, "func"); }
+    ;
 
-function
-  : FUN ID LPAREN param_list RPAREN block
-  ;
+stmt_list:
+    stmt
+    | stmt stmt_list
+    ;
 
-param_list
-  : param_decl
-  | /* empty */
-  ;
+stmt:
+    declaration
+    | assignment
+    | conditional
+    | loop_while
+    | loop_for
+    | io_stmt
+    | return_stmt
+    ;
 
-param_decl
-  : param_decl COMMA param
-  | param
-  ;
+/* Declaration: PUNJI x; or MEEZAN y; */
+declaration:
+    type IDENTIFIER PUNC_SEMI
+    { printf("[System Report] Line %d: Variable Declaration detected.\n", yylineno); }
+    | type IDENTIFIER OP_ASSIGN expression PUNC_SEMI
+    { printf("[System Report] Line %d: Variable Initialization detected.\n", yylineno); }
+    ;
 
-param
-  : VIBE ID
-  ;
+type:
+    KW_INT | KW_FLOAT | KW_STRING | KW_CONFIRM
+    ;
 
+/* Assignment: x = 10; or x :? 10 (Her special conditional assign) */
+assignment:
+    IDENTIFIER OP_ASSIGN expression PUNC_SEMI
+    { printf("[System Report] Line %d: Standard Assignment (=).\n", yylineno); }
+    | IDENTIFIER OP_CONDASSIGN expression PUNC_SEMI
+    { printf("[System Report] Line %d: Conditional Assignment (:?).\n", yylineno); }
+    | IDENTIFIER OP_INCR2 PUNC_SEMI
+    { printf("[System Report] Line %d: Double Increment (++++).\n", yylineno); }
+    ;
 
-/* ================= NORMAL BLOCK ================= */
+/* Conditional: SHART (cond) { } WARNAH { } */
+conditional:
+    KW_IF LPAREN expression RPAREN LBRACE stmt_list RBRACE
+    { printf("[System Report] Line %d: Conditional Block (SHART).\n", yylineno); }
+    | KW_IF LPAREN expression RPAREN LBRACE stmt_list RBRACE KW_ELSE LBRACE stmt_list RBRACE
+    { printf("[System Report] Line %d: Conditional Block with Else (WARNAH).\n", yylineno); }
+    ;
 
-block
-  : LBRACE stmt_list RBRACE
-  ;
+/* While Loop: CHALA (cond) { } */
+loop_while:
+    KW_WHILE LPAREN expression RPAREN LBRACE stmt_list RBRACE
+    { printf("[System Report] Line %d: While Loop (CHALA) detected.\n", yylineno); }
+    ;
 
-stmt_list
-  : stmt_list stmt
-  | /* empty */
-  ;
+/* For Loop: FARZ ( ... ) { } */
+loop_for:
+    KW_FOR LPAREN expression PUNC_SEMI expression PUNC_SEMI expression RPAREN LBRACE stmt_list RBRACE
+    { printf("[System Report] Line %d: For Loop (FARZ) detected.\n", yylineno); }
+    ;
 
-stmt
-  : declaration
-  | assignment
-  | inc_dec_stmt
-  | func_call_stmt 
-  | if_stmt
-  | while_stmt
-  | for_stmt
-  | return_stmt
-  ;
+/* IO: NIKAL => "Text"; */
+io_stmt:
+    KW_OUTPUT PUNC_ARROW expression PUNC_SEMI
+    { printf("[System Report] Line %d: Output Operation (NIKAL).\n", yylineno); }
+    | KW_INPUT PUNC_ARROW IDENTIFIER PUNC_SEMI
+    { printf("[System Report] Line %d: Input Operation (DAKHAL).\n", yylineno); }
+    ;
 
-/* ================= LOOP BLOCK ================= */
+return_stmt:
+    KW_RETURN expression PUNC_SEMI
+    { printf("[System Report] Line %d: Return Statement (VAPIS).\n", yylineno); }
+    ;
 
-loop_block
-  : LBRACE loop_stmt_list RBRACE
-  ;
+expression:
+    term
+    | expression OP_ADD term
+    | expression OP_SUB term
+    | expression OP_LT term
+    | expression OP_GT term
+    ;
 
-loop_stmt_list
-  : loop_stmt_list loop_stmt
-  | /* empty */
-  ;
+term:
+    factor
+    | term OP_MUL factor
+    | term OP_DIV factor
+    ;
 
-loop_stmt
-  : declaration
-  | assignment
-  | inc_dec_stmt   
-  | loop_if_stmt
-  | while_stmt
-  | for_stmt
-  ;
-
-
-/* ================= LOOP IF (ONLY PLACE FOR break/continue) ================= */
-
-loop_if_stmt
-  : IFY LPAREN condition RPAREN loop_if_block loop_else_part
-  ;
-
-loop_else_part
-  : ELF loop_if_block
-  | /* empty */
-  ;
-
-
-loop_if_block
-  : LBRACE loop_if_stmt_list RBRACE
-  ;
-
-loop_if_stmt_list
-  : loop_if_stmt_list loop_if_stmt
-  | /* empty */
-  ;
-
-loop_if_stmt
-  : declaration
-  | assignment
-  | inc_dec_stmt
-  | break_stmt
-  | continue_stmt
-  ;
-
-/* ================= NORMAL IF ================= */
-
-if_stmt
-  : IFY LPAREN condition RPAREN block else_part
-  ;
-
-else_part
-  : ELF LPAREN condition RPAREN block else_part
-  | ELF block
-  | /* empty */
-  ;
-
-/* ================= WHILE ================= */
-
-while_stmt
-  : WHILE LPAREN condition RPAREN loop_block
-  ;
-  
-for_stmt
-  : FOR LPAREN for_init SEMI condition SEMI for_update RPAREN loop_block
-  ;
-
-
-for_init
-  : assign_no_semi
-  | /* empty */
-  ;
-
-for_update
-  : assign_no_semi
-  | inc_dec_no_semi
-  | /* empty */
-  ;
-
-
-
-/* ================= STATEMENTS ================= */
-
-break_stmt
-  : BREAK SEMI
-  ;
-
-continue_stmt
-  : CONTINUE SEMI
-  ;
-
-declaration
-  : VIBE ID SEMI
-  ;
-
-assignment
-  : ID ASSIGN expr SEMI
-  ;
-
-inc_dec_stmt
-  : ID INC SEMI
-  | ID DEC SEMI
-  | INC ID SEMI
-  | DEC ID SEMI
-  ;
-
-assign_no_semi
-  : ID ASSIGN expr
-  ;
-
-inc_dec_no_semi
-  : ID INC
-  | ID DEC
-  | INC ID
-  | DEC ID
-  ;
-
-func_call_stmt
-  : ID LPAREN arg_list RPAREN SEMI
-  ;
-  
-arg_list
-  : arg_values
-  | /* empty */
-  ;
-
-arg_values
-  : arg_values COMMA expr
-  | expr
-  ;
-
-
-
-
-return_stmt
-  : TAKE expr SEMI
-  ;
-
-/* ================= EXPRESSIONS ================= */
-
-condition
-  : expr LT expr
-  | expr EQ expr
-  ;
-
-expr
-  : expr PLUS expr
-  | expr MIN expr
-  | expr MUL expr
-  | expr DIV expr
-  | MIN expr   %prec UMINUS
-  | PLUS expr  %prec UPLUS
-  | ID LPAREN arg_list RPAREN 
-  | NUMBER
-  | ID
-  ;
+factor:
+    LPAREN expression RPAREN
+    | IDENTIFIER
+    | NUMBER_INT
+    | NUMBER_FLOAT
+    | STRING_LITERAL
+    ;
 
 %%
-
-/* ================= ERROR & MAIN ================= */
 
 void yyerror(const char *s) {
-  fprintf(stderr,"❌ Syntax Error at line %d near '%s' (%s)\n",yylineno, yytext, s);
+    fprintf(stderr, "\n[CRITICAL ERROR] Line %d: %s\n", yylineno, s);
 }
 
-int main() {
-  if (yyparse() == 0) {
-    printf("✅ Parsing successful. No syntax errors found.\n");
-  }
-  return 0;
+int main(int argc, char **argv) {
+    printf("Compiling Phase 2 (Inshrah 0384)...\n");
+    if (argc > 1) {
+        FILE *f = fopen(argv[1], "r");
+        if (!f) {
+            perror("File error");
+            return 1;
+        }
+        yyin = f;
+    }
+    yyparse();
+    return 0;
 }
-
