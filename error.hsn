@@ -4,8 +4,8 @@ fun sum(vibe a, vibe b){
 
 welcome() {
 
-// comment
-  vib x;
+/ comment
+  vibe x
   vibe y;
   
   
@@ -14,7 +14,7 @@ welcome() {
   y = 2;
   sum(a,b);
 
-  x = x + y;
+  x = x ++ y;
   x = x - y;
   x = x * y;
   x = x / y;
@@ -31,7 +31,7 @@ welcome() {
   x--;
 
 
-  if (x < y) {
+  ify (x < y) {
     x = x + 1;
   } elfy {
     x = x - 1;
@@ -51,6 +51,5 @@ welcome() {
     ++y;
   }
 
-  //take x;
 }
 

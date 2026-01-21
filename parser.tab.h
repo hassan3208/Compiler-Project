@@ -12,6 +12,16 @@
 
 
  #line 8 "/usr/share/bison++/bison.h"
+
+#line 10 "parser.y"
+typedef union {
+  int num;
+  char* id;
+} yy_parse_stype;
+#define YY_parse_STYPE yy_parse_stype
+#ifndef YY_USE_CLASS
+#define YYSTYPE yy_parse_stype
+#endif
 #define YY_parse_parse .error verbose
 
 #line 21 "/usr/share/bison++/bison.h"
@@ -68,12 +78,6 @@
 
 
  #line 68 "/usr/share/bison++/bison.h"
-#ifndef YY_USE_CLASS
-# ifndef YYSTYPE
-#  define YYSTYPE int
-#  define YYSTYPE_IS_TRIVIAL 1
-# endif
-#endif
 
 #line 68 "/usr/share/bison++/bison.h"
 /* prefix */
@@ -187,41 +191,35 @@ typedef
 
 
  #line 169 "/usr/share/bison++/bison.h"
-#define	KW_START	258
-#define	KW_END	259
-#define	KW_FUNC	260
-#define	KW_INT	261
-#define	KW_FLOAT	262
-#define	KW_STRING	263
-#define	KW_CONFIRM	264
-#define	KW_IF	265
-#define	KW_FOR	266
-#define	KW_ELSE	267
-#define	KW_WHILE	268
-#define	KW_INPUT	269
-#define	KW_OUTPUT	270
-#define	KW_RETURN	271
-#define	OP_EQ	272
-#define	OP_NEQ	273
-#define	OP_LEQ	274
-#define	OP_GEQ	275
-#define	OP_ADD	276
-#define	OP_SUB	277
-#define	OP_MUL	278
-#define	OP_DIV	279
-#define	OP_ASSIGN	280
-#define	OP_LT	281
-#define	OP_GT	282
-#define	PUNC_ARROW	283
-#define	PUNC_SEMI	284
-#define	LBRACE	285
-#define	RBRACE	286
-#define	LPAREN	287
-#define	RPAREN	288
-#define	NUMBER_FLOAT	289
-#define	NUMBER_INT	290
-#define	STRING_LITERAL	291
-#define	IDENTIFIER	292
+#define	WELCOME	258
+#define	VIBE	259
+#define	IFY	260
+#define	ELF	261
+#define	WHILE	262
+#define	TAKE	263
+#define	FOR	264
+#define	FUN	265
+#define	BREAK	266
+#define	CONTINUE	267
+#define	ID	268
+#define	NUMBER	269
+#define	ASSIGN	270
+#define	PLUS	271
+#define	LT	272
+#define	EQ	273
+#define	MIN	274
+#define	MUL	275
+#define	DIV	276
+#define	LPAREN	277
+#define	RPAREN	278
+#define	LBRACE	279
+#define	RBRACE	280
+#define	SEMI	281
+#define	COMMA	282
+#define	INC	283
+#define	DEC	284
+#define	UMINUS	285
+#define	UPLUS	286
 
 
 #line 169 "/usr/share/bison++/bison.h"
@@ -270,41 +268,35 @@ public:
   /* static const int token ... */
   
  #line 212 "/usr/share/bison++/bison.h"
-static const int KW_START;
-static const int KW_END;
-static const int KW_FUNC;
-static const int KW_INT;
-static const int KW_FLOAT;
-static const int KW_STRING;
-static const int KW_CONFIRM;
-static const int KW_IF;
-static const int KW_FOR;
-static const int KW_ELSE;
-static const int KW_WHILE;
-static const int KW_INPUT;
-static const int KW_OUTPUT;
-static const int KW_RETURN;
-static const int OP_EQ;
-static const int OP_NEQ;
-static const int OP_LEQ;
-static const int OP_GEQ;
-static const int OP_ADD;
-static const int OP_SUB;
-static const int OP_MUL;
-static const int OP_DIV;
-static const int OP_ASSIGN;
-static const int OP_LT;
-static const int OP_GT;
-static const int PUNC_ARROW;
-static const int PUNC_SEMI;
-static const int LBRACE;
-static const int RBRACE;
+static const int WELCOME;
+static const int VIBE;
+static const int IFY;
+static const int ELF;
+static const int WHILE;
+static const int TAKE;
+static const int FOR;
+static const int FUN;
+static const int BREAK;
+static const int CONTINUE;
+static const int ID;
+static const int NUMBER;
+static const int ASSIGN;
+static const int PLUS;
+static const int LT;
+static const int EQ;
+static const int MIN;
+static const int MUL;
+static const int DIV;
 static const int LPAREN;
 static const int RPAREN;
-static const int NUMBER_FLOAT;
-static const int NUMBER_INT;
-static const int STRING_LITERAL;
-static const int IDENTIFIER;
+static const int LBRACE;
+static const int RBRACE;
+static const int SEMI;
+static const int COMMA;
+static const int INC;
+static const int DEC;
+static const int UMINUS;
+static const int UPLUS;
 
 
 #line 212 "/usr/share/bison++/bison.h"
@@ -313,41 +305,35 @@ static const int IDENTIFIER;
   enum YY_parse_ENUM_TOKEN { YY_parse_NULL_TOKEN=0
   
  #line 215 "/usr/share/bison++/bison.h"
-	,KW_START=258
-	,KW_END=259
-	,KW_FUNC=260
-	,KW_INT=261
-	,KW_FLOAT=262
-	,KW_STRING=263
-	,KW_CONFIRM=264
-	,KW_IF=265
-	,KW_FOR=266
-	,KW_ELSE=267
-	,KW_WHILE=268
-	,KW_INPUT=269
-	,KW_OUTPUT=270
-	,KW_RETURN=271
-	,OP_EQ=272
-	,OP_NEQ=273
-	,OP_LEQ=274
-	,OP_GEQ=275
-	,OP_ADD=276
-	,OP_SUB=277
-	,OP_MUL=278
-	,OP_DIV=279
-	,OP_ASSIGN=280
-	,OP_LT=281
-	,OP_GT=282
-	,PUNC_ARROW=283
-	,PUNC_SEMI=284
-	,LBRACE=285
-	,RBRACE=286
-	,LPAREN=287
-	,RPAREN=288
-	,NUMBER_FLOAT=289
-	,NUMBER_INT=290
-	,STRING_LITERAL=291
-	,IDENTIFIER=292
+	,WELCOME=258
+	,VIBE=259
+	,IFY=260
+	,ELF=261
+	,WHILE=262
+	,TAKE=263
+	,FOR=264
+	,FUN=265
+	,BREAK=266
+	,CONTINUE=267
+	,ID=268
+	,NUMBER=269
+	,ASSIGN=270
+	,PLUS=271
+	,LT=272
+	,EQ=273
+	,MIN=274
+	,MUL=275
+	,DIV=276
+	,LPAREN=277
+	,RPAREN=278
+	,LBRACE=279
+	,RBRACE=280
+	,SEMI=281
+	,COMMA=282
+	,INC=283
+	,DEC=284
+	,UMINUS=285
+	,UPLUS=286
 
 
 #line 215 "/usr/share/bison++/bison.h"
