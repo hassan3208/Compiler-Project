@@ -1,7 +1,9 @@
 ## 1. Source Code Files  
 - `scanner.l` → Flex file (lexical analyzer)  
 - `test.txt` → My unique test program (25+ lines)
-- `Document` → https://docs.google.com/document/d/1RQPYce3iAHkco8VK4EeyEgbsyV_AHVzO04LYjENLAYM/edit?tab=t.0#heading=h.8f3zdq2licbt  
+- `Document` → https://docs.google.com/document/d/1RQPYce3iAHkco8VK4EeyEgbsyV_AHVzO04LYjENLAYM/edit?tab=t.0#heading=h.8f3zdq2licbt
+- `Phase 1` → https://youtu.be/7Ia9mztIQn0
+- `Phase 2` → https://www.youtube.com/watch?v=a72En4KJCYU  
 
 ## 2. Output Files  
 - `tokens.txt` → All tokens with line numbers  
