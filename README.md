@@ -3,8 +3,8 @@
 - `test.hsn` → My unique test program
 - `error.hsn` → My invalid program
 - `Document` → [Click here to view the document](https://docs.google.com/document/d/1RQPYce3iAHkco8VK4EeyEgbsyV_AHVzO04LYjENLAYM/edit?tab=t.0#heading=h.8f3zdq2licbt)
-- `Phase 1` → [Click here to view Phase 1](https://youtu.be/7Ia9mztIQn0)
-- `Phase 2` → [Click here to view Phase 1](https://www.youtube.com/watch?v=a72En4KJCYU)  
+- `Phase 1` → [Click here to view Phase 1 vedio](https://youtu.be/7Ia9mztIQn0)
+- `Phase 2` → [Click here to view Phase 2 vedio](https://www.youtube.com/watch?v=a72En4KJCYU)  
 
 ## 2. Output Files  
 - `tokens.txt` → All tokens with line numbers  
